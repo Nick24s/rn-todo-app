@@ -3,8 +3,8 @@ import { Text, View } from "react-native";
 export default function App() {
   return (
     <View style={styles.body}>
-        <View>
-            <Text>Todo List</Text>
+        <View >
+            <Text style={styles.heading}>Todo List</Text>
         </View>
         
         <View>
@@ -22,5 +22,10 @@ const styles = {
     body : {
         padding : 20,
         alignItems : 'center'
-    }
+    },
+    heading : {
+        fontSize : 30,
+        marginTop : 30,
+        fontWeight: 'bold'
+    }   
 }
