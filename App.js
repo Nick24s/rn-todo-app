@@ -6,16 +6,17 @@ export default function App() {
 
     const [text,setText] = useState('');
     const [todos,setTodo] = useState([]);
+    const [error, setError] = useState(null)
 
     const textChangeHandler = (value) => {
         setText(value);        
     }
 
     const createTodoHandler = () => {
-        //todo make better error handling
         if(!text) {
-           return alert('Missing Todo Text!')
+           return setError('Todo text is required!')
         } ;
+
 
         const lastTodoId = todos[todos.length -1 ]?.id || 0;
 
@@ -24,6 +25,7 @@ export default function App() {
             text,
             isCompleted : false,
         };
+        setError(null);
         setTodo(oldTodos => [...oldTodos,newTodo])
         setText('');
     }
@@ -51,6 +53,10 @@ export default function App() {
             />
             <Button title="Create" onPress={createTodoHandler}/>
         </View>
+
+             {error && (
+            <Text style={{textAlign : 'center', color : 'red'}}>{error}</Text>
+        )}
         
         <View style={{width: '100%', }}>
             {todos.map(todo => <TodoItem key={todo.id} {...todo} onDone={toggleTodoHandler} onDelete={deleteTodoHandler}/>)}
