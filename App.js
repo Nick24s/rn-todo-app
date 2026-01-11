@@ -31,6 +31,10 @@ export default function App() {
     const toggleTodoHandler = (todoId) => {
         setTodo(todos => todos.map(todo => todo.id === todoId ? {...todo, isCompleted: !todo.isCompleted} : todo))
     }
+
+    const deleteTodoHandler = (todoId) => {
+        setTodo(todos => todos.filter(todo => todo.id !== todoId))
+    }
     
   return (
     <View style={styles.body}>
@@ -49,7 +53,7 @@ export default function App() {
         </View>
         
         <View style={{width: '100%', }}>
-            {todos.map(todo => <TodoItem key={todo.id} {...todo} onDone={toggleTodoHandler}/>)}
+            {todos.map(todo => <TodoItem key={todo.id} {...todo} onDone={toggleTodoHandler} onDelete={deleteTodoHandler}/>)}
         </View>
     </View>
   )
