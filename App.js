@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Text, TextInput, View } from "react-native";
+import TodoItem from "./components/todoItem";
 
 export default function App() {
 
@@ -15,6 +16,7 @@ export default function App() {
         if(!text) {
            return alert('Missing Todo Text!')
         } ;
+        // todo add ids
         const newTodo = {
             text,
             isCompleted : false,
@@ -39,8 +41,8 @@ export default function App() {
             <Button title="Create" onPress={createTodoHandler}/>
         </View>
         
-        <View>
-            <Text>View</Text>
+        <View style={{width: '100%', }}>
+            {todos.map(todo => <TodoItem key={todo.text} {...todo}/>)}
         </View>
     </View>
   )
