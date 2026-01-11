@@ -16,13 +16,20 @@ export default function App() {
         if(!text) {
            return alert('Missing Todo Text!')
         } ;
-        // todo add ids
+
+        const lastTodoId = todos[todos.length -1 ]?.id || 0;
+
         const newTodo = {
+            id: lastTodoId +1,
             text,
             isCompleted : false,
         };
         setTodo(oldTodos => [...oldTodos,newTodo])
         setText('');
+    }
+
+    const toggleTodoHandler = (todoId) => {
+        setTodo(todos => todos.map(todo => todo.id === todoId ? {...todo, isCompleted: !todo.isCompleted} : todo))
     }
     
   return (
@@ -42,7 +49,7 @@ export default function App() {
         </View>
         
         <View style={{width: '100%', }}>
-            {todos.map(todo => <TodoItem key={todo.text} {...todo}/>)}
+            {todos.map(todo => <TodoItem key={todo.id} {...todo} onDone={toggleTodoHandler}/>)}
         </View>
     </View>
   )
